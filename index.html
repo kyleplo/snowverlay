@@ -1,5 +1,5 @@
 <!DOCTYPE html><html>
-<head><title>❄️ Snowverlay - overlay your logo with snow ❄️</title></head>
+ <head><title>❄️ Snowverlay - overlay your logo with snow ❄️</title><style>body {font-family:Arial}</style></head>
 <body>
 <h1>❄️Snowverlay❄️</h1>
 <p>Overlay your logo with snow!</p>
@@ -12,7 +12,18 @@
 <p>This converts your logo to 100x100 px. Do not start until your image is uploaded.</p>
 <br><button onclick="resize()">Resize!</button><br>
 <img width="100" height="100" id="resized">
-<canvas width="100" height="100" id="canvas" hidden></canvas>
+<h2>Step 3: Customize your snowflakes ❄️</h2>
+ <p>Snow color:</p><select id="color"><option value="#ffffff" style="background-color:black;color:white">white</option><option value="#bbbbbb" style="color:#bbbbbb">light grey (for white backgrounds)</option><option value="#000000">black</option></select>
+ <p>Snow size:</p><input type="number" id="size" value="5">
+  <p>Snow count:</p><input type="number" id="count" value="50">
+ <h4>Snow types</h4>
+ <p><input type="checkbox" id="starflake" checked> Star Snowflakes ❄️</p>
+ <p><input type="checkbox" id="dotflake" checked> Dot Snowflakes 🌨</p>
+ <h2>Step 4: Add the snow</h2>
+ <button onclick="snow()">❄️Add snow!❄️</button>
+ <p>You will see a preview below. If you don't like the snow, redo steps 3 and 4.</p>
+ <img width="100" height="100" id="preview">
+ <canvas width="100" height="100" id="canvas" hidden></canvas>
 <script src="https://jnordberg.github.io/gif.js/gif.js?v=3"></script>
 <script>
 var imageUrl = "";
@@ -26,6 +37,60 @@ function resize(){
  ctx.drawImage(document.getElementById("logo"),0,0,100,100);
  var imageUrl = document.getElementById("canvas").toDataURL();
  document.getElementById("resized").src = imageUrl;
+}
+function snow(){
+var color = document.getElementById("color").value;
+var size = parseFloat(document.getElementById("size").value);
+var count = parseFloat(document.getElementById("count").value);
+var starflake = document.getElementById("starflake").checked;
+var dotflake = document.getElementById("dotflake").checked;
+var flakes = [];
+for(var i = 0;i < count;i++){var type;
+ if(starflake && dotflake){type = Math.ceil(Math.random() * 2)}else if(starflake){type = 1}else{type = 2};
+flakes.push({x: Math.ceil(Math.random() * 100),y: Math.ceil(Math.random() * 100),type: type});
+};
+var gif = new GIF({
+  workers: 2,
+  quality: 10
+});'
+  ctx.fillStyle=color;
+  ctx.strokeStyle=color;
+  ctx.lineWidth = 5;
+ for(var i = 0;i < 50;i++){
+ ctx.clearRect(0,0,100,100);
+ ctx.drawImage(document.getElementById("resized"),0,0);
+  for(var x = 0;x < count;x++){
+   ctx.moveTo(flakes[x].x,flakes[x].y);
+   if(flakes[x].type === 1){
+   ctx.moveTo(flakes[x].x + size,flakes[x].y);
+   ctx.moveTo(flakes[x].x,flakes[x].y);
+   ctx.moveTo(flakes[x].x + (size / 2),flakes[x].y + (size / 2));
+   ctx.moveTo(flakes[x].x,flakes[x].y);
+   ctx.moveTo(flakes[x].x,flakes[x].y + size);
+   ctx.moveTo(flakes[x].x,flakes[x].y);
+   ctx.moveTo(flakes[x].x - (size / 2),flakes[x].y + (size / 2));
+   ctx.moveTo(flakes[x].x,flakes[x].y);
+   ctx.moveTo(flakes[x].x - size,flakes[x].y);
+   ctx.moveTo(flakes[x].x,flakes[x].y);
+   ctx.moveTo(flakes[x].x - (size / 2),flakes[x].y - (size / 2));
+   ctx.moveTo(flakes[x].x,flakes[x].y);
+   ctx.moveTo(flakes[x].x,flakes[x].y - size);
+   ctx.moveTo(flakes[x].x,flakes[x].y);
+   ctx.moveTo(flakes[x].x + (size / 2),flakes[x].y - (size / 2));
+   ctx.moveTo(flakes[x].x,flakes[x].y);
+   }else{
+   ctx.beginPath();
+   ctx.arc(flakes[x].x,flakes[x].y,size,0,2*Math.PI);
+   ctx.stroke();
+   ctx.fill();
+   };
+  };
+  gif.addFrame(document.getElementById("canvas"), {delay: 200});
+ };
+ gif.on('finished', function(blob) {
+  document.getElementById("preview").src = URL.createObjectURL(blob);
+});
+ gif.render();
 }
 </script>
 </body>
