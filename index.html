@@ -65,21 +65,21 @@ var gif = new GIF({
   for(var x = 0;x < count;x++){
    ctx.moveTo(flakes[x].x,flakes[x].y);
    if(flakes[x].type === 1){
-   ctx.moveTo(flakes[x].x + size,flakes[x].y);
+   ctx.lineTo(flakes[x].x + size,flakes[x].y);
    ctx.moveTo(flakes[x].x,flakes[x].y);
-   ctx.moveTo(flakes[x].x + (size / 2),flakes[x].y + (size / 2));
+   ctx.lineTo(flakes[x].x + (size / 2),flakes[x].y + (size / 2));
    ctx.moveTo(flakes[x].x,flakes[x].y);
-   ctx.moveTo(flakes[x].x,flakes[x].y + size);
+   ctx.lineTo(flakes[x].x,flakes[x].y + size);
    ctx.moveTo(flakes[x].x,flakes[x].y);
-   ctx.moveTo(flakes[x].x - (size / 2),flakes[x].y + (size / 2));
+   ctx.lineTo(flakes[x].x - (size / 2),flakes[x].y + (size / 2));
    ctx.moveTo(flakes[x].x,flakes[x].y);
-   ctx.moveTo(flakes[x].x - size,flakes[x].y);
+   ctx.lneTo(flakes[x].x - size,flakes[x].y);
    ctx.moveTo(flakes[x].x,flakes[x].y);
-   ctx.moveTo(flakes[x].x - (size / 2),flakes[x].y - (size / 2));
+   ctx.lineTo(flakes[x].x - (size / 2),flakes[x].y - (size / 2));
    ctx.moveTo(flakes[x].x,flakes[x].y);
-   ctx.moveTo(flakes[x].x,flakes[x].y - size);
+   ctx.lineTo(flakes[x].x,flakes[x].y - size);
    ctx.moveTo(flakes[x].x,flakes[x].y);
-   ctx.moveTo(flakes[x].x + (size / 2),flakes[x].y - (size / 2));
+   ctx.lineTo(flakes[x].x + (size / 2),flakes[x].y - (size / 2));
    ctx.moveTo(flakes[x].x,flakes[x].y);
    }else{
    ctx.beginPath();
