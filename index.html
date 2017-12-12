@@ -73,7 +73,7 @@ var gif = new GIF({
    ctx.moveTo(flakes[x].x,flakes[x].y);
    ctx.lineTo(flakes[x].x - (size / 2),flakes[x].y + (size / 2));
    ctx.moveTo(flakes[x].x,flakes[x].y);
-   ctx.lneTo(flakes[x].x - size,flakes[x].y);
+   ctx.lineTo(flakes[x].x - size,flakes[x].y);
    ctx.moveTo(flakes[x].x,flakes[x].y);
    ctx.lineTo(flakes[x].x - (size / 2),flakes[x].y - (size / 2));
    ctx.moveTo(flakes[x].x,flakes[x].y);
@@ -87,7 +87,7 @@ var gif = new GIF({
    ctx.stroke();
    ctx.fill();
    };
-   flakes[x].y += speed;
+   flakes[x].y = flakes[x].y + speed;
    if(flakes[x].y > 100){flakes[x].y = 0};
   };
   gif.addFrame(document.getElementById("canvas"), {delay: 200});
