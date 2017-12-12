@@ -59,7 +59,7 @@ var gif = new GIF({
   ctx.fillStyle=color;
   ctx.strokeStyle=color;
   ctx.lineWidth = 2;
- for(var i = 0;i < 50;i++){
+ for(var i = 0;i < 42;i++){
  ctx.clearRect(0,0,100,100);
  ctx.drawImage(document.getElementById("resized"),0,0);
   for(var x = 0;x < count;x++){
@@ -91,7 +91,9 @@ var gif = new GIF({
    ctx.fill();
    };
   };
-  gif.addFrame(ctx, {delay: 200, copy: true});
+  var img = new Image();
+  img.src = ctx.toDataURL();
+  gif.addFrame(img, {delay: 200});
   for(var n = 0;n < count;n++){
   flakes[n].y = flakes[n].y + speed;
    if(flakes[n].y > 100){flakes[n].y = 0};
