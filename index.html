@@ -65,6 +65,7 @@ var gif = new GIF({
   for(var x = 0;x < count;x++){
    ctx.moveTo(flakes[x].x,flakes[x].y);
    if(flakes[x].type === 1){
+   ctx.beginPath();
    ctx.lineTo(flakes[x].x + size,flakes[x].y);
    ctx.moveTo(flakes[x].x,flakes[x].y);
    ctx.lineTo(flakes[x].x + (size / 2),flakes[x].y + (size / 2));
@@ -81,6 +82,8 @@ var gif = new GIF({
    ctx.moveTo(flakes[x].x,flakes[x].y);
    ctx.lineTo(flakes[x].x + (size / 2),flakes[x].y - (size / 2));
    ctx.moveTo(flakes[x].x,flakes[x].y);
+   ctx.stroke();
+   ctx.fill();
    }else{
    ctx.beginPath();
    ctx.arc(flakes[x].x,flakes[x].y,size,0,2*Math.PI);
@@ -91,6 +94,7 @@ var gif = new GIF({
    if(flakes[x].y > 100){flakes[x].y = 0};
   };
   gif.addFrame(document.getElementById("canvas"), {delay: 200});
+  console.log(flakes[0]);
  };
  gif.on('finished', function(blob) {
   document.getElementById("preview").src = URL.createObjectURL(blob);
