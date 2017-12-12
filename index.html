@@ -58,7 +58,7 @@ var gif = new GIF({
 });
   ctx.fillStyle=color;
   ctx.strokeStyle=color;
-  ctx.lineWidth = 5;
+  ctx.lineWidth = 2;
  for(var i = 0;i < 50;i++){
  ctx.clearRect(0,0,100,100);
  ctx.drawImage(document.getElementById("resized"),0,0);
@@ -91,7 +91,7 @@ var gif = new GIF({
    ctx.fill();
    };
   };
-  gif.addFrame(document.getElementById("canvas"), {delay: 200});
+  gif.addFrame(ctx, {delay: 200, copy: true});
   for(var n = 0;n < count;n++){
   flakes[n].y = flakes[n].y + speed;
    if(flakes[n].y > 100){flakes[n].y = 0};
